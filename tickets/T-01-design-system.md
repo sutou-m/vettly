@@ -8,11 +8,11 @@ VettlyのブランドカラーSlate×Tealを Tailwind CSS v4の `@theme inline` 
 全コンポーネントで一貫したデザインを実現する基盤を構築する。
 
 ## 完了条件
-- [ ] `app/globals.css` にVettlyデザイントークンが定義されている
-- [ ] `@theme inline` でTailwindユーティリティにマッピングされている
-- [ ] Tailwind組み込みの `gray-*` を使用していない
-- [ ] `app/layout.tsx` にNoto Sans JPが設定されている
-- [ ] `npm run dev` が正常起動する
+- [x] `app/globals.css` にVettlyデザイントークンが定義されている
+- [x] `@theme inline` でTailwindユーティリティにマッピングされている
+- [x] Tailwind組み込みの `gray-*` を使用していない
+- [x] `app/layout.tsx` にNoto Sans JPが設定されている
+- [x] `npm run dev` が正常起動する
 
 ## 実装内容
 
