@@ -18,10 +18,10 @@ SUPABASE_SERVICE_KEY=（既存と同じ）
 ```
 
 ## 完了条件
-- [ ] `src/lib/supabase.ts` にクライアントが作成されている
-- [ ] 全6テーブルが `vet_` プレフィックスで作成されている
-- [ ] 全テーブルにRLSポリシーが設定されている
-- [ ] `src/types/database.ts` に型定義が作成されている
+- [x] `src/lib/supabase.ts` にクライアントが作成されている
+- [x] 全6テーブルが `vet_` プレフィックスで作成されている
+- [x] 全テーブルにRLSポリシーが設定されている
+- [x] `src/types/database.ts` に型定義が作成されている
 
 ## 実装内容
 
