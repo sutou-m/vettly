@@ -37,6 +37,7 @@ export interface Database {
           auth_password?: string
           created_at?: string
         }
+        Relationships: never[]
       }
       vet_positions: {
         Row: {
@@ -75,6 +76,7 @@ export interface Database {
           is_active?: boolean
           created_at?: string
         }
+        Relationships: never[]
       }
       vet_documents: {
         Row: {
@@ -107,6 +109,7 @@ export interface Database {
           ocr_status?: OcrStatus
           created_at?: string
         }
+        Relationships: never[]
       }
       vet_candidates: {
         Row: {
@@ -166,6 +169,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: never[]
       }
       vet_candidate_notes: {
         Row: {
@@ -189,6 +193,7 @@ export interface Database {
           content?: string
           created_at?: string
         }
+        Relationships: never[]
       }
       vet_notifications: {
         Row: {
@@ -215,7 +220,12 @@ export interface Database {
           sent_at?: string
           status?: NotificationStatus
         }
+        Relationships: never[]
       }
     }
+    Views: Record<string, never>
+    Functions: Record<string, never>
+    Enums: Record<string, never>
+    CompositeTypes: Record<string, never>
   }
 }
