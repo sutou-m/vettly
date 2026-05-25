@@ -152,7 +152,7 @@ export default async function DashboardPage() {
   ]
 
   return (
-    <div className="p-8 max-w-6xl mx-auto">
+    <div className="p-4 md:p-8 max-w-6xl mx-auto">
       <PageHeader
         title="ダッシュボード"
         description={`ようこそ、${session.user?.name ?? session.user?.email} さん`}
@@ -186,7 +186,7 @@ export default async function DashboardPage() {
                 <div className="flex items-start justify-between gap-2">
                   <div>
                     <p className="text-xs text-[#6B7F7C]">{label}</p>
-                    <p className="mt-1.5 text-3xl font-bold text-[#1C2B35]">
+                    <p className="mt-1.5 text-2xl md:text-3xl font-bold text-[#1C2B35]">
                       {value}
                       <span className="text-base font-medium text-[#6B7F7C] ml-0.5">{unit}</span>
                     </p>

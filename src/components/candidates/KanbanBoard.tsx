@@ -63,7 +63,7 @@ export function KanbanBoard({ candidates, positions }: KanbanBoardProps) {
       </div>
 
       {/* カンバンボード（横スクロール） */}
-      <div className="overflow-x-auto pb-4">
+      <div className="overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0">
         <div className="flex gap-4" style={{ minWidth: 'max-content' }}>
           {COLUMNS.map(({ status, label, headerColor }) => {
             const cards = filtered.filter((c) => c.status === status)

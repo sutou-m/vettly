@@ -27,7 +27,7 @@ export default async function CandidateUploadPage() {
   }))
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <PageHeader
         title="書類アップロード"
         description="応募書類をアップロードしてAIが自動解析・スコアリングします"

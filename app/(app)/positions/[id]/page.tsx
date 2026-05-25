@@ -27,7 +27,7 @@ export default async function PositionPage({
 
   if (id === 'new') {
     return (
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         <PageHeader title="新規ポジション作成" actions={backButton} />
         <PositionForm />
       </div>

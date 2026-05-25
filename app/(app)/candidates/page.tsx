@@ -36,7 +36,7 @@ export default async function CandidatesPage() {
   }))
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <PageHeader
         title="候補者管理"
         description="候補者をステータス別に管理します"

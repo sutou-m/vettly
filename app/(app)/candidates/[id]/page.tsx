@@ -93,7 +93,7 @@ export default async function CandidateDetailPage({
   ]
 
   return (
-    <div className="p-8 max-w-6xl mx-auto">
+    <div className="p-4 md:p-8 max-w-6xl mx-auto">
       <PageHeader
         title={displayName}
         description={position ? `応募ポジション：${position.title}` : undefined}

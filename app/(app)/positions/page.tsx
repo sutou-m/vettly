@@ -33,7 +33,7 @@ export default async function PositionsPage() {
   const list = positions ?? []
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <PageHeader
         title="求人ポジション管理"
         description="AIスコアリングの基準となるポジションを設定します"

@@ -1,0 +1,14 @@
+
+> vettly@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.7:3000
+- Environments: .env.local
+✓ Ready in 1159ms
+⚠ Slow filesystem detected. The benchmark took 399ms. If D:\dev\vettly\.next/dev is a network drive, consider moving it to a local folder.
+See more: https://nextjs.org/docs/app/guides/local-development
+- Experiments (use with caution):
+  · serverActions
+

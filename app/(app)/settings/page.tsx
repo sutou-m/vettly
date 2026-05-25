@@ -19,7 +19,7 @@ export default async function SettingsPage() {
   const adminEmail = process.env.ADMIN_EMAIL ?? ''
 
   return (
-    <div className="p-8 max-w-2xl mx-auto">
+    <div className="p-4 md:p-8 max-w-2xl mx-auto">
       <PageHeader title="設定" description="プロフィールとメール通知の設定" />
 
       <div className="flex flex-col gap-6">
