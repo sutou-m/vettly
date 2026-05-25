@@ -31,7 +31,21 @@ export async function createPosition(
   const title = (formData.get('title') as string)?.trim()
   if (!title) return { error: 'ポジション名は必須です' }
 
-  const { error } = await supabaseAdmin.from('vet_positions').insert({
+  // セッションのuser_idがvet_usersに存在することを確認
+  const { data: userRecord } = await supabaseAdmin
+    .from('vet_users')
+    .select('id')
+    .eq('id', session.user.id)
+    .single()
+
+  if (!userRecord) {
+    console.error('[createPosition] user not found in vet_users. session.user.id:', session.user.id)
+    return {
+      error: 'ユーザー情報が見つかりません。一度ログアウトして再登録してください。',
+    }
+  }
+
+  const payload = {
     user_id: session.user.id,
     title,
     description: (formData.get('description') as string) || null,
@@ -40,9 +54,15 @@ export async function createPosition(
     required_experience: Number(formData.get('required_experience')) || 0,
     evaluation_criteria: parseEvalCriteria(formData),
     is_active: formData.get('is_active') === 'true',
-  })
+  }
 
-  if (error) return { error: 'ポジションの作成に失敗しました' }
+  const { error } = await supabaseAdmin.from('vet_positions').insert(payload)
+
+  if (error) {
+    console.error('[createPosition] Supabase error:', JSON.stringify(error, null, 2))
+    console.error('[createPosition] payload:', JSON.stringify(payload, null, 2))
+    return { error: 'ポジションの作成に失敗しました' }
+  }
 
   revalidatePath('/positions')
   redirect('/positions')

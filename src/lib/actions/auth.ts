@@ -51,14 +51,18 @@ export async function register(prevState: AuthState, formData: FormData): Promis
 
   const hashedPassword = await bcrypt.hash(password, 12)
 
-  const { error } = await supabaseAdmin
+  const { data: newUser, error } = await supabaseAdmin
     .from('vet_users')
     .insert({ name, email, auth_password: hashedPassword })
+    .select('id')
+    .single()
 
-  if (error) {
+  if (error || !newUser) {
+    console.error('[register] vet_users INSERT failed:', JSON.stringify(error, null, 2))
     return { error: 'アカウント作成に失敗しました' }
   }
 
+  console.log('[register] vet_users created. id:', newUser.id)
   redirect('/login')
 }
 

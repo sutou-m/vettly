@@ -1,8 +1,10 @@
+import Link from 'next/link'
 import { auth } from '@/src/lib/auth'
 import { supabaseAdmin } from '@/src/lib/supabase'
 import { PageHeader } from '@/src/components/ui/PageHeader'
 import { KanbanBoard } from '@/src/components/candidates/KanbanBoard'
-import { Users } from 'lucide-react'
+import { Button } from '@/src/components/ui/Button'
+import { Users, Upload } from 'lucide-react'
 
 export default async function CandidatesPage() {
   const session = await auth()
@@ -38,6 +40,14 @@ export default async function CandidatesPage() {
       <PageHeader
         title="候補者管理"
         description="候補者をステータス別に管理します"
+        actions={
+          <Link href="/candidates/upload">
+            <Button>
+              <Upload size={16} />
+              書類をアップロード
+            </Button>
+          </Link>
+        }
       />
 
       {mapped.length === 0 ? (
@@ -51,6 +61,12 @@ export default async function CandidatesPage() {
               書類をアップロードして候補者を追加してください
             </p>
           </div>
+          <Link href="/candidates/upload">
+            <Button>
+              <Upload size={16} />
+              書類をアップロード
+            </Button>
+          </Link>
         </div>
       ) : (
         <KanbanBoard candidates={mapped} positions={positions ?? []} />
