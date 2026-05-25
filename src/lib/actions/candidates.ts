@@ -25,6 +25,32 @@ export async function updateCandidateStatus(
   return {}
 }
 
+export async function deleteCandidateNote(noteId: string): Promise<{ error?: string }> {
+  const session = await auth()
+  if (!session?.user?.id) return { error: '認証が必要です' }
+
+  // 取得してcandidate_idを得てからrevalidate
+  const { data: note } = await supabaseAdmin
+    .from('vet_candidate_notes')
+    .select('candidate_id')
+    .eq('id', noteId)
+    .eq('user_id', session.user.id)
+    .single()
+
+  if (!note) return { error: 'メモが見つかりません' }
+
+  const { error } = await supabaseAdmin
+    .from('vet_candidate_notes')
+    .delete()
+    .eq('id', noteId)
+    .eq('user_id', session.user.id)
+
+  if (error) return { error: 'メモの削除に失敗しました' }
+
+  revalidatePath(`/candidates/${note.candidate_id}`)
+  return {}
+}
+
 export async function addCandidateNote(
   candidateId: string,
   content: string

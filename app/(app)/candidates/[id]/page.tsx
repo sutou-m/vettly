@@ -7,7 +7,8 @@ import { Button } from '@/src/components/ui/Button'
 import { ScoreBar } from '@/src/components/ui/ScoreBar'
 import { CandidateDetailStatus } from '@/src/components/candidates/CandidateDetailStatus'
 import { AddNoteForm } from '@/src/components/candidates/AddNoteForm'
-import { ArrowLeft, Mail, Phone, GraduationCap, Briefcase, MessageSquare, Trophy } from 'lucide-react'
+import { ArrowLeft, Mail, Phone, GraduationCap, Briefcase, MessageSquare, Trophy, Trash2 } from 'lucide-react'
+import { deleteCandidateNote } from '@/src/lib/actions/candidates'
 import type { Json } from '@/src/types/database'
 
 type ScoreBreakdown = {
@@ -304,18 +305,29 @@ export default async function CandidateDetailPage({
             {(notes ?? []).map((note) => (
               <div
                 key={note.id}
-                className="flex flex-col gap-1 p-3 bg-[#F9F8F6] rounded-[10px]"
+                className="flex items-start gap-3 p-3 bg-[#F9F8F6] rounded-[10px] group"
               >
-                <p className="text-sm text-[#1C2B35] whitespace-pre-wrap">{note.content}</p>
-                <p className="text-xs text-[#6B7F7C]">
-                  {new Date(note.created_at).toLocaleString('ja-JP', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
-                </p>
+                <div className="flex-1 flex flex-col gap-1 min-w-0">
+                  <p className="text-sm text-[#1C2B35] whitespace-pre-wrap">{note.content}</p>
+                  <p className="text-xs text-[#6B7F7C]">
+                    {new Date(note.created_at).toLocaleString('ja-JP', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </p>
+                </div>
+                <form action={deleteCandidateNote.bind(null, note.id)}>
+                  <button
+                    type="submit"
+                    title="削除"
+                    className="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded-[6px] text-[#6B7F7C] hover:text-[#DC2626] hover:bg-red-50"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </form>
               </div>
             ))}
           </div>

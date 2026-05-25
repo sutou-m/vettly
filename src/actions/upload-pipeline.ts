@@ -7,6 +7,7 @@ import { parseResume, type ParsedResume } from '@/src/lib/resume-parser'
 import { scoreCandidate, type ScoreResult, type PositionInput } from '@/src/lib/scorer'
 import { revalidatePath } from 'next/cache'
 import type { Json } from '@/src/types/database'
+import { sendProcessingCompleteEmail } from '@/src/lib/email'
 
 export async function runOcrStep(documentId: string): Promise<string> {
   const session = await auth()
@@ -68,25 +69,50 @@ export async function saveCandidateAction(
   const session = await auth()
   if (!session?.user?.id) return { error: '認証が必要です' }
 
-  const { error } = await supabaseAdmin.from('vet_candidates').insert({
-    user_id: session.user.id,
-    document_id: params.documentId,
-    position_id: params.positionId,
-    name: params.name,
-    email: params.email,
-    phone: params.phone,
-    education: params.education,
-    experience_years: params.experience_years,
-    skills: params.skills,
-    summary: params.summary,
-    score: params.score,
-    score_breakdown: params.score_breakdown,
-    status: 'screening',
-    ai_processed: true,
-  })
+  const { data: inserted, error } = await supabaseAdmin
+    .from('vet_candidates')
+    .insert({
+      user_id: session.user.id,
+      document_id: params.documentId,
+      position_id: params.positionId,
+      name: params.name,
+      email: params.email,
+      phone: params.phone,
+      education: params.education,
+      experience_years: params.experience_years,
+      skills: params.skills,
+      summary: params.summary,
+      score: params.score,
+      score_breakdown: params.score_breakdown,
+      status: 'screening',
+      ai_processed: true,
+    })
+    .select('id')
+    .single()
 
   if (error) return { error: '候補者の保存に失敗しました' }
 
   revalidatePath('/candidates')
+
+  // メール通知（失敗しても保存はロールバックしない）
+  if (inserted?.id) {
+    let positionTitle = 'ポジション未設定'
+    if (params.positionId) {
+      const { data: pos } = await supabaseAdmin
+        .from('vet_positions')
+        .select('title')
+        .eq('id', params.positionId)
+        .single()
+      if (pos) positionTitle = pos.title
+    }
+    await sendProcessingCompleteEmail({
+      userId: session.user.id,
+      candidateName: params.name,
+      score: params.score,
+      positionTitle,
+      candidateId: inserted.id,
+    })
+  }
+
   return {}
 }
