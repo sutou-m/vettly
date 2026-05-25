@@ -14,7 +14,7 @@ export default function LoginPage() {
       <div className="bg-white rounded-[16px] border border-[#D0D8D6] shadow-sm p-8">
         <div className="mb-8 text-center">
           <h1 className="text-2xl font-bold text-[#1C2B35]">Vettly</h1>
-          <p className="mt-1 text-sm text-[#6B7F7C]">獣医師採用AIスクリーニング</p>
+          <p className="mt-1 text-sm text-[#6B7F7C]">採用代行・人材エージェント向けAIスクリーニング</p>
         </div>
 
         <form action={action} className="flex flex-col gap-4">
@@ -22,7 +22,7 @@ export default function LoginPage() {
             label="メールアドレス"
             type="email"
             name="email"
-            placeholder="example@clinic.com"
+            placeholder="example@company.com"
             required
             autoComplete="email"
           />

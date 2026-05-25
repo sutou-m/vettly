@@ -22,7 +22,7 @@ export default function RegisterPage() {
             label="お名前"
             type="text"
             name="name"
-            placeholder="田中 院長"
+            placeholder="田中 太郎"
             required
             autoComplete="name"
           />
@@ -30,7 +30,7 @@ export default function RegisterPage() {
             label="メールアドレス"
             type="email"
             name="email"
-            placeholder="example@clinic.com"
+            placeholder="example@company.com"
             required
             autoComplete="email"
           />
