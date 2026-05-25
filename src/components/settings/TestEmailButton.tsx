@@ -13,7 +13,7 @@ export function TestEmailButton({ adminEmail }: { adminEmail: string }) {
     setResult(null)
     startTransition(async () => {
       const res = await sendTestEmailAction()
-      setResult(res)
+      setResult(res ?? null)
     })
   }
 

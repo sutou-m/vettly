@@ -8,7 +8,7 @@ import { ScoreBar } from '@/src/components/ui/ScoreBar'
 import { CandidateDetailStatus } from '@/src/components/candidates/CandidateDetailStatus'
 import { AddNoteForm } from '@/src/components/candidates/AddNoteForm'
 import { ArrowLeft, Mail, Phone, GraduationCap, Briefcase, MessageSquare, Trophy, Trash2 } from 'lucide-react'
-import { deleteCandidateNote } from '@/src/lib/actions/candidates'
+import { deleteNoteFormAction } from '@/src/lib/actions/candidates'
 import type { Json } from '@/src/types/database'
 
 type ScoreBreakdown = {
@@ -37,12 +37,9 @@ export default async function CandidateDetailPage({
   const [{ data: candidate }, { data: notes }] = await Promise.all([
     supabaseAdmin
       .from('vet_candidates')
-      .select(`
-        id, name, email, phone, education, experience_years,
-        summary, skills, score, score_breakdown, status,
-        created_at, position_id,
-        vet_positions ( id, title )
-      `)
+      .select(
+        'id, name, email, phone, education, experience_years, summary, skills, score, score_breakdown, status, created_at, position_id'
+      )
       .eq('id', id)
       .eq('user_id', session.user.id)
       .single(),
@@ -59,9 +56,17 @@ export default async function CandidateDetailPage({
   const score = candidate.score ?? 0
   const skills = candidate.skills ?? []
   const bd = parseBreakdown(candidate.score_breakdown)
-  const position = Array.isArray(candidate.vet_positions)
-    ? candidate.vet_positions[0]
-    : candidate.vet_positions
+
+  // position_id からポジション情報を個別取得（埋め込みジョインは型推論非対応のため）
+  let position: { id: string; title: string } | null = null
+  if (candidate.position_id) {
+    const { data: pos } = await supabaseAdmin
+      .from('vet_positions')
+      .select('id, title')
+      .eq('id', candidate.position_id)
+      .single()
+    position = pos
+  }
 
   // ランキング：同じポジションの候補者（スコア降順）
   let ranking: { id: string; name: string | null; score: number | null }[] = []
@@ -319,7 +324,7 @@ export default async function CandidateDetailPage({
                     })}
                   </p>
                 </div>
-                <form action={deleteCandidateNote.bind(null, note.id)}>
+                <form action={deleteNoteFormAction.bind(null, note.id)}>
                   <button
                     type="submit"
                     title="削除"

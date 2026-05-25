@@ -61,7 +61,7 @@ export function StatusBarChart({ data }: { data: StatusChartData }) {
           tickLine={false}
         />
         <Tooltip
-          formatter={(value: number) => [`${value}人`, '候補者数']}
+          formatter={(value) => [`${value}人`, '候補者数']}
           contentStyle={{ fontSize: 12, borderColor: '#D0D8D6', borderRadius: 8 }}
           cursor={{ fill: '#F9F8F6' }}
         />

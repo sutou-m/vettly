@@ -25,6 +25,11 @@ export async function updateCandidateStatus(
   return {}
 }
 
+// form action 用ラッパー（bind で noteId を渡す → FormData は Next.js が自動付与）
+export async function deleteNoteFormAction(noteId: string, _formData: FormData): Promise<void> {
+  await deleteCandidateNote(noteId)
+}
+
 export async function deleteCandidateNote(noteId: string): Promise<{ error?: string }> {
   const session = await auth()
   if (!session?.user?.id) return { error: '認証が必要です' }
