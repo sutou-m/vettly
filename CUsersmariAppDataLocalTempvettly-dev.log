@@ -12,3 +12,48 @@ See more: https://nextjs.org/docs/app/guides/local-development
 - Experiments (use with caution):
   · serverActions
 
+ GET / 200 in 573ms (next.js: 93ms, proxy.ts: 286ms, application-code: 194ms)
+ GET /login 200 in 197ms (next.js: 110ms, proxy.ts: 6ms, application-code: 82ms)
+[31m[auth][error][0m CredentialsSignin: Read more at https://errors.authjs.dev#credentialssignin
+    at Module.callback (D:\dev\vettly\.next\dev\server\chunks\ssr\node_modules_@auth_core_0~jrzue._.js:4314:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async AuthInternal (D:\dev\vettly\.next\dev\server\chunks\ssr\node_modules_@auth_core_0~jrzue._.js:5162:24)
+    at async Auth (D:\dev\vettly\.next\dev\server\chunks\ssr\node_modules_@auth_core_0~jrzue._.js:5384:34)
+    at async signIn (D:\dev\vettly\.next\dev\server\chunks\ssr\node_modules_0q6magu._.js:6051:17)
+    at async login (D:\dev\vettly\.next\dev\server\chunks\ssr\[root-of-the-server]__0i.6fqv._.js:130:9)
+    at async executeActionAndPrepareForRender (D:\dev\vettly\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js:64:5248)
+    at async D:\dev\vettly\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js:64:1986
+    at async handleAction (D:\dev\vettly\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js:62:25386)
+    at async renderToHTMLOrFlightImpl (D:\dev\vettly\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js:69:55695)
+    at async doRender (D:\dev\vettly\.next\dev\server\chunks\ssr\node_modules_12vwf~y._.js:4537:28)
+    at async AppPageRouteModule.handleResponse (D:\dev\vettly\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js:71:66429)
+    at async handleResponse (D:\dev\vettly\.next\dev\server\chunks\ssr\node_modules_12vwf~y._.js:4848:32)
+    at async Module.handler (D:\dev\vettly\.next\dev\server\chunks\ssr\node_modules_12vwf~y._.js:5254:20)
+    at async DevServer.renderToResponseWithComponentsImpl (D:\dev\vettly\node_modules\next\dist\server\base-server.js:1462:9)
+    at async DevServer.renderPageComponent (D:\dev\vettly\node_modules\next\dist\server\base-server.js:1514:24)
+    at async DevServer.renderToResponseImpl (D:\dev\vettly\node_modules\next\dist\server\base-server.js:1564:32)
+    at async DevServer.pipeImpl (D:\dev\vettly\node_modules\next\dist\server\base-server.js:1044:25)
+    at async NextNodeServer.handleCatchallRenderRequest (D:\dev\vettly\node_modules\next\dist\server\next-server.js:338:17)
+    at async DevServer.handleRequestImpl (D:\dev\vettly\node_modules\next\dist\server\base-server.js:935:17)
+    at async D:\dev\vettly\node_modules\next\dist\server\dev\next-dev-server.js:394:20
+    at async Span.traceAsyncFn (D:\dev\vettly\node_modules\next\dist\trace\trace.js:164:20)
+    at async DevServer.handleRequest (D:\dev\vettly\node_modules\next\dist\server\dev\next-dev-server.js:390:24)
+    at async invokeRender (D:\dev\vettly\node_modules\next\dist\server\lib\router-server.js:266:21)
+    at async handleRequest (D:\dev\vettly\node_modules\next\dist\server\lib\router-server.js:465:24)
+    at async requestHandlerImpl (D:\dev\vettly\node_modules\next\dist\server\lib\router-server.js:514:13)
+    at async Server.requestListener (D:\dev\vettly\node_modules\next\dist\server\lib\start-server.js:225:13)
+ POST /login 200 in 392ms (next.js: 3ms, proxy.ts: 7ms, application-code: 382ms)
+  └─ ƒ login(undefined, {}) in 354ms src/lib/actions/auth.ts
+ GET /login 200 in 45ms (next.js: 3ms, proxy.ts: 3ms, application-code: 39ms)
+ GET /login 200 in 53ms (next.js: 3ms, proxy.ts: 6ms, application-code: 44ms)
+ GET /login 200 in 41ms (next.js: 2ms, proxy.ts: 3ms, application-code: 36ms)
+ GET / 200 in 49ms (next.js: 2ms, proxy.ts: 4ms, application-code: 43ms)
+ GET /login 200 in 44ms (next.js: 3ms, proxy.ts: 4ms, application-code: 37ms)
+ GET / 200 in 52ms (next.js: 3ms, proxy.ts: 5ms, application-code: 44ms)
+ GET / 200 in 56ms (next.js: 3ms, proxy.ts: 7ms, application-code: 46ms)
+ GET /login 200 in 30ms (next.js: 4ms, proxy.ts: 6ms, application-code: 20ms)
+ GET /dashboard 200 in 207ms (next.js: 45ms, proxy.ts: 14ms, application-code: 148ms)
+ POST /login 303 in 903ms (next.js: 2ms, proxy.ts: 3ms, application-code: 898ms)
+  └─ ƒ login(undefined, {}) in 672ms src/lib/actions/auth.ts
+ GET /candidates 200 in 358ms (next.js: 27ms, proxy.ts: 9ms, application-code: 322ms)
+ GET /positions 200 in 169ms (next.js: 23ms, proxy.ts: 11ms, application-code: 135ms)
